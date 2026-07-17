@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>인플루언서 공구 매니저 v1.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css" rel="stylesheet">
 <style>
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -57,7 +58,7 @@ a{text-decoration:none}
 .sb-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);border:none;background:none;cursor:pointer;font-family:inherit;color:var(--text2);font-size:13px;font-weight:600;text-align:left;width:100%;transition:all .15s}
 .sb-link:hover{background:var(--primary-light);color:var(--primary-dark)}
 .sb-link.on{background:var(--primary-light);color:var(--primary);font-weight:700}
-.sb-link-ico{font-size:17px;width:22px;text-align:center}
+.sb-link-ico{font-size:18px;width:22px;text-align:center;display:inline-flex;align-items:center;justify-content:center}
 .sb-foot{padding:12px 10px 20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px;margin-top:auto}
 .sb-action{padding:11px 14px;border-radius:var(--radius-sm);border:2px solid var(--primary);background:var(--primary);color:white;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;width:100%;text-align:center}
 .sb-action:hover{background:var(--primary-dark);border-color:var(--primary-dark)}
@@ -114,7 +115,7 @@ a{text-decoration:none}
 /* ── BOTTOM NAV ── */
 .bot-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);display:flex;padding:8px 0 max(8px,env(safe-area-inset-bottom));z-index:150}
 .bot-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;border:none;background:none;cursor:pointer;padding:4px 0}
-.bot-ico{font-size:20px}
+.bot-ico{font-size:22px;display:block}
 .bot-lbl{font-size:10px;font-weight:700;color:var(--text3)}
 .bot-btn.on .bot-lbl{color:var(--primary);font-weight:800}
 .bot-btn.on .bot-ico{filter:none}
@@ -140,7 +141,7 @@ a{text-decoration:none}
 /* ── SECTION ── */
 .ds{background:var(--surface);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
 .ds-hdr{display:flex;align-items:center;gap:12px;padding:15px 16px 13px}
-.ds-hdr-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ds-hdr-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .ds-hdr-info{flex:1}
 .ds-hdr-title{font-size:15px;font-weight:800;color:var(--text1)}
 .ds-hdr-sub{font-size:11px;color:var(--text3);margin-top:2px;font-weight:500}
@@ -415,13 +416,13 @@ a{text-decoration:none}
 
   <!-- BOTTOM NAV -->
   <div class="bot-nav">
-    <button class="bot-btn" id="mbn-dash" onclick="setTab('dash')"><span class="bot-ico">📊</span><span class="bot-lbl">대시보드</span></button>
-    <button class="bot-btn" id="mbn-list" onclick="setTab('list')"><span class="bot-ico">📋</span><span class="bot-lbl">공구관리</span></button>
-    <button class="bot-btn" id="mbn-cal" onclick="setTab('cal')"><span class="bot-ico">📅</span><span class="bot-lbl">캘린더</span></button>
-    <button class="bot-btn" id="mbn-tasks" onclick="setTab('tasks')"><span class="bot-ico">📝</span><span class="bot-lbl">업무</span></button>
-    <button class="bot-btn" id="mbn-settings" onclick="setTab('settings')"><span class="bot-ico">⚙️</span><span class="bot-lbl">설정</span></button>
+    <button class="bot-btn" id="mbn-dash" onclick="setTab('dash')"><i class="ti ti-layout-dashboard bot-ico" aria-hidden="true"></i><span class="bot-lbl">대시보드</span></button>
+    <button class="bot-btn" id="mbn-list" onclick="setTab('list')"><i class="ti ti-clipboard-list bot-ico" aria-hidden="true"></i><span class="bot-lbl">공구관리</span></button>
+    <button class="bot-btn" id="mbn-cal" onclick="setTab('cal')"><i class="ti ti-calendar bot-ico" aria-hidden="true"></i><span class="bot-lbl">캘린더</span></button>
+    <button class="bot-btn" id="mbn-tasks" onclick="setTab('tasks')"><i class="ti ti-notebook bot-ico" aria-hidden="true"></i><span class="bot-lbl">업무</span></button>
+    <button class="bot-btn" id="mbn-settings" onclick="setTab('settings')"><i class="ti ti-settings bot-ico" aria-hidden="true"></i><span class="bot-lbl">설정</span></button>
   </div>
-  <button class="fab" onclick="openAdd()">＋</button>
+  <button class="fab" onclick="openAdd()" aria-label="공구 추가"><i class="ti ti-plus" style="font-size:24px" aria-hidden="true"></i></button>
 </div>
 </div>
 
@@ -959,22 +960,22 @@ function rDash(){
   }).join(''):`<div class="empty-s"><div class="empty-s-ico">📝</div><div class="empty-s-txt">30일 내 개인 일정 없음</div></div>`;
 
   return navHTML+`<div class="dash-body">
-    <div class="ds" id="sec-urg"><div class="ds-hdr h-urg"><div class="ds-hdr-ico">🚨</div>
+    <div class="ds" id="sec-urg"><div class="ds-hdr h-urg"><div class="ds-hdr-ico"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
       <div class="ds-hdr-info"><div class="ds-hdr-title" style="color:#DC2626">긴급 &amp; 오늘 할 일</div><div class="ds-hdr-sub" style="color:#DC2626">${counts.urgent}건 처리 필요</div></div>
       <button class="ds-add-btn" style="border-color:#FECACA;color:#DC2626" onclick="openTaskAdd()">+ 업무 추가</button></div>
       <div class="ds-body">${s1}</div></div>
-    <div class="ds" id="sec-gonggu"><div class="ds-hdr h-gonggu"><div class="ds-hdr-ico">📅</div>
+    <div class="ds" id="sec-gonggu"><div class="ds-hdr h-gonggu"><div class="ds-hdr-ico"><i class="ti ti-calendar-event" aria-hidden="true"></i></div>
       <div class="ds-hdr-info"><div class="ds-hdr-title" style="color:#059669">공구 일정</div><div class="ds-hdr-sub" style="color:#059669">진행 중 + 예정 · ${counts.gonggu}건</div></div>
       <button class="ds-add-btn" style="border-color:#A7F3D0;color:#059669" onclick="openAdd()">+ 추가</button></div>
       <div class="ds-body">${s2}</div></div>
 
-    <div class="ds" id="sec-settle"><div class="ds-hdr h-settle"><div class="ds-hdr-ico">💰</div>
+    <div class="ds" id="sec-settle"><div class="ds-hdr h-settle"><div class="ds-hdr-ico"><i class="ti ti-currency-won" aria-hidden="true"></i></div>
       <div class="ds-hdr-info"><div class="ds-hdr-title" style="color:#1D4ED8">정산 관리</div><div class="ds-hdr-sub" style="color:#1D4ED8">7일 이내 정산 예정 · ${counts.settle}건</div></div></div>
       <div class="ds-body">${s4}</div></div>
-    <div class="ds" id="sec-brand"><div class="ds-hdr h-brand"><div class="ds-hdr-ico">🏢</div>
+    <div class="ds" id="sec-brand"><div class="ds-hdr h-brand"><div class="ds-hdr-ico"><i class="ti ti-building-store" aria-hidden="true"></i></div>
       <div class="ds-hdr-info"><div class="ds-hdr-title" style="color:#5B21B6">브랜드 소통</div><div class="ds-hdr-sub" style="color:#5B21B6">제안 검토 중 · ${counts.brand}개 (7일 이상 무응답 자동 숨김)</div></div></div>
       <div class="ds-body">${s5}</div></div>
-    <div class="ds" id="sec-personal"><div class="ds-hdr h-personal"><div class="ds-hdr-ico">📝</div>
+    <div class="ds" id="sec-personal"><div class="ds-hdr h-personal"><div class="ds-hdr-ico"><i class="ti ti-notebook" aria-hidden="true"></i></div>
       <div class="ds-hdr-info"><div class="ds-hdr-title" style="color:#0369A1">업무 일정</div><div class="ds-hdr-sub" style="color:#0369A1">30일 내 미완료 · ${counts.personal}건</div></div>
       <button class="ds-add-btn" style="border-color:#BAE6FD;color:#0369A1" onclick="openTaskAdd()">+ 추가</button></div>
       <div class="ds-body">${s6}</div></div>
@@ -1357,7 +1358,7 @@ function rSettings(){
     <!-- 데이터 관리 -->
     <div class="ds">
       <div class="ds-hdr" style="border-bottom-color:#E2E8F0;background:linear-gradient(90deg,#F8FAFC,white)">
-        <div class="ds-hdr-ico">💾</div>
+        <div class="ds-hdr-ico"><i class="ti ti-database" aria-hidden="true"></i></div>
         <div class="ds-hdr-info">
           <div class="ds-hdr-title">데이터 관리</div>
         </div>
@@ -1378,7 +1379,7 @@ function rSettings(){
     <!-- 구글드라이브 연동 -->
     <div class="ds">
       <div class="ds-hdr" style="border-bottom-color:#BFDBFE;background:linear-gradient(90deg,#EFF6FF,white)">
-        <div class="ds-hdr-ico">☁️</div>
+        <div class="ds-hdr-ico"><i class="ti ti-cloud" aria-hidden="true"></i></div>
         <div class="ds-hdr-info">
           <div class="ds-hdr-title" style="color:#1D4ED8">구글드라이브 연동</div>
           <div class="ds-hdr-sub" style="color:#3B82F6">PC ↔ 모바일 동기화</div>
@@ -1400,7 +1401,7 @@ function rSettings(){
     <!-- 위험 구역 -->
     <div class="ds">
       <div class="ds-hdr" style="border-bottom-color:#FECACA;background:linear-gradient(90deg,#FFF5F5,white)">
-        <div class="ds-hdr-ico">⚠️</div>
+        <div class="ds-hdr-ico"><i class="ti ti-alert-hexagon" aria-hidden="true"></i></div>
         <div class="ds-hdr-info">
           <div class="ds-hdr-title" style="color:#DC2626">위험 구역</div>
         </div>
@@ -1413,7 +1414,7 @@ function rSettings(){
     <!-- 정보 -->
     <div class="ds">
       <div class="ds-hdr" style="border-bottom-color:#D1FAE5;background:linear-gradient(90deg,#ECFDF5,white)">
-        <div class="ds-hdr-ico">📱</div>
+        <div class="ds-hdr-ico"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
         <div class="ds-hdr-info">
           <div class="ds-hdr-title" style="color:#059669">인플루언서 공구매니저</div>
           <div class="ds-hdr-sub" style="color:#059669">v1.0</div>
